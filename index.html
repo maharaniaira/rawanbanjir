@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>rawanbanjir</title>
+    <title>WebGIS</title>
     <link rel="stylesheet" href="library/leaflet/leaflet.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="library/leaflet/leaflet.js"></script>
@@ -13,7 +13,7 @@
 <body>
     <div id="map">
         <script>
-            var map = L.map('map').setView([-7.769238979408523, 110.48878046425014], 13);
+            var map = L.map('map').setView([-7.760999, 110.492642], 13);
 
             var baseLayers = {
                 'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
@@ -28,7 +28,7 @@
                 style: function(feature) {
                     return {
                         color: "black",
-                        fillColor: KlasBanjir[feature.properties.keterangan],
+                        fillColor: KlasBanjir[feature.properties.Keterangan],
                         weight: 0.3,
                         opacity: 0,
                         fillOpacity: 0.7
@@ -36,22 +36,22 @@
                 },
                 onEachFeature: function( feature, layer ){
                     layer.bindPopup(
-                        "Klas Rawan Banjir : " + "<left>" + feature.properties.keterangan + "</left>" + "<br>" +
-                        "Luas :" + "<left>" + feature.properties.luas + "</left>" + " m2"
+                        "Klas Rawan Banjir : " + "<left>" + feature.properties.Keterangan + "</left>" + "<br>" +
+                        "Luas :" + "<left>" + feature.properties.Luas + "</left>" + " m2"
                         )
                 }
             });
-            $.getJSON("data/RAWANBANJIRJSON.json", function(data) {
+            $.getJSON("data/Rawan Banget geo.json", function(data) {
                 AreaRawanBanjir.addData(data);
             });
 
 			/* Merubah Tampilan Warna Berdasar Atribut Klas Banjir */
 			var KlasBanjir = {
-				"AMAN":"#d3f0f2",
-				"CUKUP AMAN":"#9bd1e8",
-				"AGAK AMAN":"#6c76cc",
-				"RAWAN":"#1326d1",
-				"SANGAT RAWAN":"#0b0a5c"
+				"aman":"#006100",
+				"cukup aman":"#7bab00",
+				"agak rawan":"#ffff00",
+				"rawan":"#ff9900",
+				"sangat rawan":"#ff2200"
 			};
 
             var mapLayers = {
